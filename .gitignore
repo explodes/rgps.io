@@ -1,3 +1,4 @@
 *.pyc
 database.db
 staticfiles
+rgps/local_settings.py
