@@ -8,6 +8,7 @@ class UserManager(BaseUserManager):
                           is_staff=False, is_active=True, is_superuser=False,
                           **extra_fields)
         user.set_password(password)
+        user.token = self.model.generate_token()
         user.save()
         return user
 

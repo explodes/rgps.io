@@ -41,6 +41,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     registration_id = models.CharField(max_length=2048, null=True)
     google_oauth2 = models.CharField(max_length=2048, null=True)
 
+    token = models.CharField(max_length=128, null=True, unique=True)
+    latitude = models.FloatField(null=True)
+    longitude = models.FloatField(null=True)
+
     objects = managers.UserManager()
 
     USERNAME_FIELD = 'username'
@@ -60,21 +64,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.get_username()
 
-
-class Token(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    token = models.CharField(max_length=128, null=False, unique=True)
-
-    objects = managers.TokenManager()
-
     @staticmethod
-    def generate():
-        return '%x' % random.getrandbits(128 * 4)
-
-    def __unicode__(self):
-        return unicode(self.user)
-
-
+    def generate_token():
+        while True:
+            token = '%x' % random.getrandbits(128 * 4)
+            if not User.objects.filter(token=token).exists():
+                return token
 
 
 

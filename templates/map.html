@@ -2,5 +2,26 @@
 
 
 {% block main %}
-
+    <script type="text/javascript">
+        var $lat = $('#lat');
+        var $long = $('#long');
+        function onCoords(lat, long) {
+            $lat.text(lat);
+            $long.text(long);
+        }
+        function update() {
+            $.get('/api/coords/?token=' + '{{ user.token|escapejs }}', function (data) {
+                var lat, long;
+                data = JSON.parse(data);
+                console.log(data);
+                console.log(data.body);
+                lat = data.body.latitude;
+                long = data.body.longitude;
+                onCoords(lat, long);
+            });
+        }
+        setInterval(update, {{ GPS_UPDATE_FRQ }});
+    </script>
+    <div id="lat"></div>
+    <div id="long"></div>
 {% endblock %}

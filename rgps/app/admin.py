@@ -13,7 +13,7 @@ class MyUserChangeForm(UserChangeForm):
 class MyUserAdmin(UserAdmin):
     form = MyUserChangeForm
 
-    list_display = ('username', 'is_staff', 'is_superuser', 'registration_id')
+    list_display = ('username', 'is_staff', 'is_superuser', 'token', 'registration_id', 'latitude', 'longitude')
     list_filter = ('is_staff', 'is_superuser')
 
 

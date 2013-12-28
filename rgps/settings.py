@@ -18,10 +18,22 @@ INSTALLED_APPS = (
     'south',
     'rgps.app',
     'rgps.api',
-    'rgps.c2dm',
+    'rgps.push',
 )
 
 AUTH_USER_MODEL = "app.User"
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'rgps.push.context.settings',
+)
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -54,6 +66,11 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS = (
     rel('templates'),
 )
+
+GCM_API_KEY = "AIzaSyCaz2J_lo9Db28wDZXyvE8c8NCCwC3pUu4"
+
+GPS_UPDATE_FRQ = 1000
+GPS_UPDATE_COUNT = 60
 
 try:
     from local_settings import *
