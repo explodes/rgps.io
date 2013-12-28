@@ -1,0 +1,43 @@
+form {
+    width: 320px;
+    padding:48px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.label {
+    text-align: right;
+    width:70px;
+}
+
+.field {
+    text-align: left;
+    width:142px;
+}
+
+.button {
+    text-align: center;
+    background: none;
+    border: none;
+}
+
+.mid {
+    width: 320px;
+    margin: 0 auto;
+}
+
+.holo-dark {
+    border-bottom: 2px solid #0099cc;
+}
+
+.holo-light {
+    border-bottom: 2px solid #33b5e5;
+}
+
+.holo-bright {
+    border-bottom: 2px solid #00ddff;
+}
+
+.pad {
+    padding: 12px;
+}

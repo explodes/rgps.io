@@ -23,7 +23,6 @@ INSTALLED_APPS = (
 
 AUTH_USER_MODEL = "app.User"
 
-
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
@@ -45,12 +44,6 @@ MIDDLEWARE_CLASSES = (
 )
 ROOT_URLCONF = 'rgps.urls'
 WSGI_APPLICATION = 'rgps.wsgi.application'
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': rel('database.db'),
-    }
-}
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'America/Denver'
 USE_I18N = False
@@ -75,14 +68,15 @@ GPS_UPDATE_COUNT = 60
 
 ## HEROKU
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    rel('static'),
 )
 
 try:

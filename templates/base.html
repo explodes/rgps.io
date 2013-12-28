@@ -1,9 +1,11 @@
 <!doctype html>
 <html>
 <head>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css"/>
     {% block extracss %}{% endblock %}
-    {% block extrajs %}{% endblock %}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    {% block extrajs %}{% endblock %}
 </head>
 <body>
 {% block main %}{% endblock %}

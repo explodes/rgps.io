@@ -1,1 +1,1 @@
-web: gunicorn rgps/wsgi.py
+web: gunicorn rgps.wsgi:application
