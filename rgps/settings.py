@@ -4,9 +4,8 @@ rel = lambda *x: os.path.abspath(os.path.join(os.path.dirname(__file__), '..', *
 
 BASE_DIR = rel()
 SECRET_KEY = '2=u1b)gxns$^6kedxf8=vo0=%_@=vsx7@5enjmq^bd#)9%$bv)'
-DEBUG = True
-TEMPLATE_DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -52,9 +51,6 @@ USE_TZ = True
 
 MEDIA_ROOT = rel('media')
 MEDIA_URL = '/media/'
-
-STATIC_ROOT = rel('static')
-STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
     rel('templates'),
