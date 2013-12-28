@@ -1,4 +1,3 @@
-import os
 import time
 
 import requests
@@ -22,16 +21,11 @@ def send_gps_request_to_user(user):
         }
     }
 
-    if os.environ.get('PROXIMO_URL'):
-        proxies = {'http': os.environ.get('PROXIMO_URL', '')}
-    else:
-        proxies = None
-
     attempt = 1
 
     while attempt < 10:
         try:
-            response = requests.post(GCM_ENDPOINT, data=data, headers=headers, proxies=proxies)
+            response = requests.post(GCM_ENDPOINT, data=data, headers=headers)
             if response.status_code != 200:
                 raise Exception('Back off')
         except:
