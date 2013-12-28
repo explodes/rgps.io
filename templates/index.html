@@ -7,24 +7,29 @@
         {% else %}
             <form method="post" action="">
 
-                <div class="mid pad">
-                    <label class="label" for="username">Username</label>
-                    <input class="field" id="username" type="text" name="username"/>
+                <div class="mid holo-dark">
                 </div>
+
+                <div class="mid pad medium">Log In</div>
 
                 <div class="mid holo-bright">
                 </div>
 
                 <div class="mid pad">
-                    <label class="label" for="password">Password</label>
-                    <input class="field" id="password" name="password" type="password"/>
+                    <label class="label small" for="username">Username</label>
+                    <input class="field small" id="username" type="text" name="username"/>
                 </div>
 
-                <div class="mid holo-light">
+                <div class="mid pad">
+                    <label class="label small" for="password">Password</label>
+                    <input class="field small" id="password" name="password" type="password"/>
                 </div>
 
                 <div class="mid">
-                    <input class="pad button holo-dark" type="submit" value="Log In"/>
+                    <input class="button small" type="submit" value="OK"/>
+                </div>
+
+                <div class="mid holo-light">
                 </div>
                 {% csrf_token %}
             </form>

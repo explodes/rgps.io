@@ -1,18 +1,26 @@
 form {
     width: 320px;
-    padding:48px;
+    padding: 48px;
     text-align: center;
     margin: 0 auto;
 }
 
+.medium {
+    font-size: 16px;
+}
+
+.small {
+    font-size: 12px;
+}
+
 .label {
     text-align: right;
-    width:70px;
+    width: 70px;
 }
 
 .field {
     text-align: left;
-    width:142px;
+    width: 142px;
 }
 
 .button {
