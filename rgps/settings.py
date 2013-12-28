@@ -74,6 +74,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     rel('static'),
 )
+import urllib2
+if os.environ.get('PROXIMO_URL', '') != '':
+    proxy = urllib2.ProxyHandler({'http': os.environ.get('PROXIMO_URL', '')})
+    auth = urllib2.HTTPBasicAuthHandler()
+    opener = urllib2.build_opener(proxy, auth, urllib2.HTTPHandler)
+    urllib2.install_opener(opener)
 
 try:
     from local_settings import *
