@@ -1,5 +1,4 @@
 import json
-import traceback
 from functools import wraps
 
 from django import http
@@ -46,7 +45,6 @@ def signup(request):
         user = User.objects.create_user(username, password=password, token=Token.generate())
         return _json_response(200, True, "created", **{'username': user.username, 'token': user.token})
     except Exception as e:
-        traceback.print_exc()
         return _json_response(400, False, str(e))
 
 
@@ -61,7 +59,6 @@ def login(request):
         user.save()
         return _json_response(200, True, "logged in", **{'username': user.username, 'token': user.token})
     except Exception as e:
-        traceback.print_exc()
         return _json_response(400, False, str(e))
 
 
@@ -75,7 +72,6 @@ def register(request):
         user.save()
         return _json_response(200, True, "registered")
     except Exception as e:
-        traceback.print_exc()
         return _json_response(400, False, str(e))
 
 
@@ -85,9 +81,8 @@ def user(request):
         username = request.GET['username']
         user = User.objects.get(username=username)
         return _json_response(200, True, "found", **{'username': user.username})
-    except User.DoesNotExist:
-        traceback.print_exc()
-        return _json_response(400, False, "does not exist")
+    except Exception as e:
+        return _json_response(400, False, str(e))
 
 
 @csrf_exempt
@@ -108,5 +103,4 @@ def coords(request):
             return _json_response(200, True, "set coords",
                                   **{'latitude': user.latitude, 'longitude': user.longitude, 'altitude': user.altitude})
     except Exception as e:
-        traceback.print_exc()
         return _json_response(400, False, str(e))
