@@ -17,6 +17,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'rgps.app',
+    'rgps.api',
+    'rgps.c2dm',
 )
 
 AUTH_USER_MODEL = "app.User"

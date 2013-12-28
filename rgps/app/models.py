@@ -38,7 +38,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=128, null=True)
     email = models.EmailField(max_length=512, null=True)
 
-    registration_id = models.CharField(max_length=1024, null=True)
+    registration_id = models.CharField(max_length=2048, null=True)
+    google_oauth2 = models.CharField(max_length=2048, null=True)
 
     objects = managers.UserManager()
 

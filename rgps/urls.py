@@ -6,8 +6,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
                        url(r'^admin/', include(admin.site.urls)),
-                       url(r'^', include('rgps.app.urls')),
-                       url(r'^api/', include('rgps.api.urls')),
+                       url(r'^', include('rgps.app.urls', namespace='app')),
+                       url(r'^api/', include('rgps.api.urls', namespace='api')),
 )
 
 
