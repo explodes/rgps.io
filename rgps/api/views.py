@@ -58,6 +58,7 @@ def login(request):
         username = bag['username']
         user = User.objects.get(username=username)
         user.token = User.generate_token()
+        user.save()
         return _json_response(200, True, "logged in", **{'username': user.username, 'token': user.token})
     except Exception as e:
         traceback.print_exc()
@@ -69,7 +70,7 @@ def login(request):
 def register(request):
     try:
         bag = json.loads(request.body, 'utf-8')
-        user = User.objects.filter(token=bag['token'])
+        user = User.objects.get(token=bag['token'])
         user.registration_id = bag['registration_id']
         user.save()
         return _json_response(200, True, "registered")
