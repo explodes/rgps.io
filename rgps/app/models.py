@@ -44,6 +44,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     token = models.CharField(max_length=128, null=True, unique=True)
     latitude = models.FloatField(null=True)
     longitude = models.FloatField(null=True)
+    altitude = models.FloatField(null=True)
 
     objects = managers.UserManager()
 

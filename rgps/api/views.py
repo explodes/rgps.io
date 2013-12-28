@@ -96,13 +96,17 @@ def coords(request):
     try:
         if request.method == 'GET':
             user = User.objects.get(token=request.GET['token'])
-            return _json_response(200, True, 'got coords', **{'latitude': user.latitude, 'longitude': user.longitude})
+            return _json_response(200, True, 'get coords',
+                                  **{'latitude': user.latitude, 'longitude': user.longitude, 'altitude': user.altitude})
         elif request.method == 'POST':
             bag = json.loads(request.body, 'utf-8')
             user = User.objects.get(token=bag['token'])
             user.longitude = bag['longitude']
             user.latitude = bag['latitude']
+            user.altitude = bag['altitude']
             user.save()
+            return _json_response(200, True, "set coords",
+                                  **{'latitude': user.latitude, 'longitude': user.longitude, 'altitude': user.altitude})
     except Exception as e:
         traceback.print_exc()
         return _json_response(400, False, str(e))
