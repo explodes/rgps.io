@@ -23,7 +23,7 @@ def send_gps_request_to_user(user):
 
     attempt = 1
 
-    while attempt < 10:
+    while attempt < 3:
         try:
             response = requests.post(GCM_ENDPOINT, data=data, headers=headers)
             if response.status_code != 200:
