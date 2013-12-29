@@ -3,6 +3,7 @@ import threading
 from django import http
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.utils.decorators import method_decorator
@@ -21,6 +22,7 @@ class IndexView(TemplateView):
         password = self.request.POST.get('password')
 
         user = authenticate(username=username, password=password)
+        login(user)
 
         if user:
             return http.HttpResponseRedirect(reverse('app:map'))
