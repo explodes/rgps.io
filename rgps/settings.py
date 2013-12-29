@@ -56,19 +56,11 @@ TEMPLATE_DIRS = (
     rel('templates'),
 )
 
-GCM_API_KEY = "AIzaSyCaz2J_lo9Db28wDZXyvE8c8NCCwC3pUu4"
-
 GPS_UPDATE_FRQ = 2500
 GPS_UPDATE_COUNT = 60
 
-
-## HEROKU
-import dj_database_url
-
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
+
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
