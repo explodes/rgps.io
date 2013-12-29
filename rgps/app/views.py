@@ -1,5 +1,3 @@
-import threading
-
 from django import http
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
@@ -39,7 +37,7 @@ class MapView(TemplateView):
 
     def get_context_data(self, **kwargs):
         user = self.request.user
-        threading.Thread(target=api.send_gps_request_to_user, args=(user,)).start()
+        api.threaded_gps_request_with_backoff(user)
         return {}
 
 
