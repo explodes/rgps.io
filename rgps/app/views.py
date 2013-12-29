@@ -22,9 +22,9 @@ class IndexView(TemplateView):
         password = self.request.POST.get('password')
 
         user = authenticate(username=username, password=password)
-        login(user)
 
-        if user:
+        if user and user.is_active:
+            login(self.request, user)
             return http.HttpResponseRedirect(reverse('app:map'))
         else:
             return self.get(request, *args, **kwargs)
