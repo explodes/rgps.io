@@ -23,9 +23,9 @@ def gps_request(user):
         print 'Error sending GPS request to %s: %s' % (user, error)
         return False
     else:
-        status_code = response.status_code
-        if status_code != 200:
-            print 'Bad status code sending GPS request to %s: %s' % (user, status_code)
+        success = response['success'] == 1
+        if success:
+            print 'Bad status code sending GPS request to %s: %s' % (user, response)
             return False
         else:
             return True
