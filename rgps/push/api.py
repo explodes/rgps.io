@@ -8,7 +8,7 @@ from django.conf import settings
 GCM_ENDPOINT = "https://android.googleapis.com/gcm/send"
 
 BACK_OFF_T0 = 40
-BACK_OFF_ATTEMPTS = 10
+BACK_OFF_ATTEMPTS = 15
 
 
 def gps_request(user):
