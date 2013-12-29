@@ -8,7 +8,7 @@ from django.conf import settings
 GCM_ENDPOINT = "https://android.googleapis.com/gcm/send"
 
 BACK_OFF_T0 = 10
-BACK_OFF_ATTEMPTS = 3
+BACK_OFF_ATTEMPTS = 10
 
 
 def gps_request(user):
@@ -38,21 +38,27 @@ def gps_request(user):
             return True
 
 
-def gps_request_with_backoff(user, attempts=BACK_OFF_ATTEMPTS, t0=BACK_OFF_T0):
+def gps_request_with_backoff(user, attempts=BACK_OFF_ATTEMPTS, t0millis=BACK_OFF_T0):
     attempt = 1
+    wait = t0millis * 0.001
     while attempt < BACK_OFF_ATTEMPTS:
         success = gps_request(user)
         if success:
             return True
         else:
-            wait = attempt ** 2 * BACK_OFF_T0
+            wait *= 2
             print 'Back off for: %s' % wait
             time.sleep(wait)
             attempt += 1
     return False
 
 
-def threaded_gps_request_with_backoff(user, attempts=BACK_OFF_ATTEMPTS, t0=BACK_OFF_T0):
-    thread = threading.Thread(target=gps_request_with_backoff, args=(user,), kwargs={'attempts': attempts, 't0': t0})
+def threaded_gps_request_with_backoff(user, attempts=BACK_OFF_ATTEMPTS, t0millis=BACK_OFF_T0):
+    thread = threading.Thread(target=gps_request_with_backoff,
+                              args=(user,),
+                              kwargs={
+                                  'attempts': attempts,
+                                  't0millis': t0millis
+                              })
     thread.start()
     return thread
