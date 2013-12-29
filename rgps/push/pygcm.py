@@ -92,7 +92,6 @@ class Urllib2Client(HTTPClient):
             'Authorization': 'key=%s' % api_key
         }
         x = self._handler.dump(registration_ids, send_data)
-        print x
         request = urllib2.Request(
             self.url,
             self._handler.dump(registration_ids, send_data),

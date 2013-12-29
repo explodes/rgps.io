@@ -24,7 +24,7 @@ def gps_request(user):
         return False
     else:
         success = response['success'] == 1
-        if success:
+        if not success:
             print 'Bad status code sending GPS request to %s: %s' % (user, response)
             return False
         else:
