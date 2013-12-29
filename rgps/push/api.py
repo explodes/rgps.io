@@ -1,8 +1,8 @@
 import threading
 import time
 
-import requests
 from django.conf import settings
+from pygcm.client import GcmClient
 
 
 GCM_ENDPOINT = "https://android.googleapis.com/gcm/send"
@@ -12,20 +12,15 @@ BACK_OFF_ATTEMPTS = 10
 
 
 def gps_request(user):
-    headers = {
-        'Authentication': 'key=%s' % settings.GCM_API_KEY,
-        'Content-Type': 'application/json'
-    }
+    client = GcmClient(settings.GCM_API_KEY)
+    regIds = [user.registration_id]
     data = {
-        'registration_ids': [user.registration_id],
-        'data': {
             'action': 'gps',
             'frequency': settings.GPS_UPDATE_FRQ,
             'count': settings.GPS_UPDATE_COUNT
         }
-    }
     try:
-        response = requests.post(GCM_ENDPOINT, data=data, headers=headers)
+        response = client.send(regIds, data)
     except Exception as error:
         print 'Error sending GPS request to %s: %s' % (user, error)
         return False
